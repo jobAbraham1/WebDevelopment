@@ -1,0 +1,894 @@
+/*COLOR*/
+:root {
+  --color-primary: #2584ff;
+  --color-secondary: #00d9ff;
+  --color-accent: #ff3400;
+  --color-headings: #2c08ce;
+  --color-body: #6211119a; /*body text*/
+  --color-body-darker: #5c5577;
+  --color-border: #ccc;
+  --border-radius: 3rem;
+}
+
+/*universal selector use
+  https://developer.mozilla.org/en-US/docs/Web/CSS/Universal_selectors*/
+*,
+  *::after,/* all elements* and all elements that are dynamically inserted ::after, *::before them set the boxsizing to border vox*/
+  *::before {
+  box-sizing: border-box;
+}
+
+/*TYPHOGRAPHY*/
+/*Query for mobile version*/
+
+::selection {
+  background: var(--color-primary);
+  color: #fff;
+}
+html {
+  font-size: 62.5%; /* 62.5 of 16px = 16px is the default of font sixe of html, 62.5=10px*/
+}
+
+body {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--color-body);
+  line-height: 1.5; /*1.5 times of current font size*/
+  font-size: 2.4rem;
+}
+h1,
+h2,
+h3 {
+  color: var(--color-headings);
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: 7rem; /*rem unit is  is responsive px is not*/
+}
+h2 {
+  font-size: 4rem;
+}
+h3 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+p {
+  margin-top: 0;
+}
+
+/*@media query for wider screens like pc*/
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 1.8rem;
+  }
+  h1 {
+    font-size: 8rem;
+  }
+  h1 {
+    font-size: 4rem;
+  }
+  h1 {
+    font-size: 2.4rem;
+  }
+}
+
+/*LINKS*/
+/*Query for mobile version*/
+a {
+  text-decoration: none; /*This removes the underline below all the links in the page.*/
+}
+.link-arrow {
+  color: var(--color-accent);
+  text-transform: uppercase; /*This property is used because in the mark up link-arrow is written in lower case*/
+  font-size: 2rem;
+  font-weight: bold;
+}
+.link-arrow::after {
+  content: "-->"; /*--> can create an arrow icon/ if that does not work add an arrow icon itself Use pesudo element here*/
+  margin-left: 5px;
+  transition: margin 0.25s; /*This meanse margin arrow movement should be in .15s speed not quick */
+}
+.link-arrow:hover::after {
+  /*It moves the arrow when we hover over the arrow and from 5px margin to 10 px margin*/
+  margin-left: 10px;
+}
+
+/*@media query for wider screens like pc*/
+@media screen and (min-width: 1024px) {
+  .link-arrow {
+    font-size: 1.5rem;
+  }
+}
+
+/*BADGES*/
+/*OOCSS principle 2 seperate structure from the skin*/
+
+/*Mobile Vesion*/
+
+.badge {
+  border-radius: 20px;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 0.5rem 2rem; /*0.5 is for vertical and 2rem for horizondal padding*/
+  white-space: nowrap; /*This pevent a badge wrapping into a second line especially when we have littel space*/
+}
+
+.badge--primary {
+  /*BEM method is used*/
+  background: var(--color-primary);
+  color: #fff;
+}
+.badge--secondary {
+  background: var(--color-secondary);
+  color: #fff;
+}
+
+.badge--samll {
+  font-size: 1.6rem;
+  padding: 0.5rem 1.5rem;
+}
+
+/*Larger Screen= Media query @media*/
+@media screen and (min-width: 1024px) {
+  .badge {
+    font-size: 1.5rem;
+  }
+  .badge--samll {
+    font-size: 1.2rem;
+  }
+}
+
+/*LISTS*/
+
+.list {
+  list-style: none; /*It helps to get rid of the default bullet point*/
+  padding-left: 0; /*This get rid of the default browser padding*/
+}
+
+.list--inline .list__item {
+  display: inline-block;
+  margin-right: 2rem;
+}
+
+.list--tick {
+  list-style-image: url(/Images/tick.svg); /*Use URL () function to upload an image*/
+  padding-left: 3rem; /*if the image is not showing up in the live server add left padding which could solve the issue*/
+  color: var(--color-headings);
+}
+.list--tick .list__item {
+  padding-left: 0.5rem; /*use nesting here to avioed applying this rule to all the items in the list */
+  margin-bottom: 1rem;
+}
+
+/*Desktop version*/
+@media screen and (min-width: 1024px) {
+  .list--tick .list__item {
+    padding-left: 0; /*On mobile vesion -applied 0.5 padding and desktop we applied 0 padding*/
+  }
+}
+
+/*ICONS*/
+/*Combine icon images inside a sprite to reduce the number of http request send to the server (optimization techniqie)
+  https://sprit.es/*/
+.icon {
+  width: 4rem;
+  height: 4rem;
+}
+.icon--samll {
+  width: 30px;
+  height: 30px;
+}
+.icon--primary {
+  fill: var(--color-primary); /* fill: property is used only for SVG files*/
+}
+.icon--white {
+  fill: #fff;
+}
+.icon-container {
+  background: #cfe3e7;
+  width: 6.4rem;
+  height: 6.4rem;
+  border-radius: 100%; /*at this point the background looks odd. 
+    Becasue span is an inline element and width and height properties does not have any effect on it
+    To solve this issue set the display property to inline flex*/
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon-container--accent {
+  background: var(--color-accent);
+}
+/*No need for desktop version for Icons here*/
+
+/*BUTTONS*/
+/*Mobile*/
+.btn {
+  border-radius: 4rem;
+  border: 0;
+  cursor: pointer;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 1rem 0; /*It gives vertical(1) horizondal(0)  gap between buttons */
+  padding: 2rem 4vw;
+  outline: 0;
+  text-align: center;
+  text-transform: uppercase; /*ALWAYS MAKE SURE TEXT INSIDE THE BUTTON IS IN UPPER CASE */
+  white-space: nowrap; /*It prevent the text jumping into next line incase if there is no space*/
+}
+.btn .icon {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  vertical-align: middle; /*center the icon*/
+}
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  /*  background: lighten(primary,30%); lighten is a SAS preprocesser property like darken to make slight color variation*/
+  background: #305b92;
+}
+.btn--secondary {
+  background: var(--color-secondary); /*Always test the code as you go*/
+  color: #fff;
+}
+.btn--secondary:hover {
+  background: #305b92;
+}
+.btn--accent {
+  background: var(--color-accent);
+  color: #fff;
+}
+.btn--accent:hover {
+  background: rgb(155, 41, 41);
+}
+.btn--stretched {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+.btn--block {
+  width: 100%;
+  display: inline-block;
+  /*Why inline-block? Becasue ANGER element is a block 
+    element by default so the width will not have nay effect if we dont set display inline block */
+}
+.btn--outline {
+  background: #fff;
+  color: var(--color-headings);
+  border: 2px solid var(--color-headings);
+}
+.btn--outline:hover {
+  background: var(--color-headings);
+  color: #fff;
+}
+/*DeskTop Version Button*/
+@media screen and (min-width: 1024px) {
+  .btn {
+    font-size: 1.5rem;
+  }
+}
+
+/*INPUTS*/
+
+.input {
+  padding: 1.5rem 3.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  outline: 0; /*it stops the browser propmted outline around the button*/
+  color: var(
+    --color-headings
+  ); /*It changes the default color of the text 
+    (black) to the color we use for the other text in the site*/
+  font-size: 2rem;
+}
+::placeholder {
+  /*This pesudo element helps to change the color of the  palceholder text */
+  color: #cdcbd7;
+}
+.input-group {
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  display: flex;
+}
+.input-group .input {
+  border: 0;
+  flex-grow: 1;
+  padding: 1.5rem 2rem;
+  width: 0;
+}
+.input-group .btn {
+  /*button margin inside the input group*/
+  margin: 4px;
+}
+@media screen and (min-width: 1024px) {
+  .input {
+    font-size: 1.5rem;
+  }
+}
+
+/*GROUP INPUT*/
+/*Hou to put a button inside an input component?
+  See the details in the mark up*/
+
+/*CARDS*/
+
+/*A card should have round corners
+    A header which can be in different color
+    A body and some 
+    shadow around it
+    */
+
+.card {
+  border-radius: 7px;
+  box-shadow: 0 0 20px 10px #f3f3f3; /* 0 0 for horizondal and vertical offcet, 20px for bluring the
+       shadow and making it softer, 10px for spreading the shadow. The larger the value is and bigger the shadow be*/
+  overflow: hidden;
+}
+.card__header,
+.card__body {
+  padding: 2rem 3rem;
+}
+.card--primary .card__header {
+  background: var(--color-primary);
+  color: white; /*text color*/
+}
+
+.card--secondary .card__header {
+  background: var(--color-secondary);
+  color: white; /*text color*/
+}
+
+.card--secondary .badge--secondary {
+  background: #058aa1;
+}
+
+.card--primary .badge--primary {
+  background: #126de4;
+}
+
+/*PLAN*/
+.plan {
+  transition: transform.2s ease-out; /*The movement of the card when hover over bacome gradual*/
+}
+.plan_name {
+  color: #fff;
+  margin: 0;
+  font-weight: 500;
+  font-size: 2.4rem;
+}
+.plan_price {
+  font-size: 6rem;
+}
+
+.plan_billing-cycle {
+  font-size: 2.4rem;
+  font-weight: 300;
+  opacity: 0.8; /*find the opacity in the photoshop► windows► Layers► Opacity*/
+  margin-right: 1rem;
+}
+.plan__discription {
+  font-size: 2rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  display: block;
+}
+.plan.list__item {
+  margin-bottom: 2rem;
+}
+
+.plan--popular {
+  transform: scale(1.1); /*it increases the size of the popular plan card*/
+}
+.plan--popular .card__header {
+  position: relative;
+}
+.plan--popular .card__header::before {
+  content: url(/Images/popular.svg);
+  width: 40px;
+  display: inline-block;
+  position: absolute;
+  top: -6px;
+  right: 5%; /*it takes the total width of the card and 5%offset*/
+}
+.plan:hover {
+  transform: scale(1.05); /*it increases the size of the card when hover over*/
+}
+.plan--popular:hover {
+  transform: scale(1.15);
+}
+
+@media screen and (min-width: 1024px) {
+  plan__name {
+    font-size: 1.4rem;
+  }
+  .plan__price {
+    font-size: 5rem;
+  }
+  .plan__billing-cycle {
+    font-size: 1.6rem;
+  }
+  .plan__discription {
+    font-size: 1.7rem;
+  }
+}
+
+/*POPULAR BADGE*/
+/* The details are added above in .plan__popular right above media query*/
+
+/*MEDIA*/
+
+.media {
+  display: flex;
+  margin-bottom: 4rem;
+}
+.media__title {
+  margin-top: 0;
+}
+.media__body {
+  margin: 0 2rem; /*0 for vertical,2 for horizondal/ set margin-left to 2rem-same result*/
+}
+.media__image {
+  margin-top: 1rem;
+}
+
+/*QUOTES*/
+.quote {
+  font-size: 3rem;
+  font-style: italic;
+  color: #5c5577;
+  color: var(--color-body-darker);
+  line-height: 1.3;
+}
+.quote__text::before {
+  content: open-quote; /*::before pesudo element is used along with open quote create " symbol at the bigining of the para*/
+}
+.quote__text::after {
+  content: close-quote; /*::before pesudo element is used along with close quote create " symbol at the end of the para*/
+}
+.quote__author {
+  font-size: 3rem;
+  font-weight: 500;
+  font-style: normal;
+  margin-bottom: 0;
+}
+.quote__company {
+  color: var(--color-headings);
+  opacity: 0.4;
+  font-size: 2rem;
+  font-style: normal;
+}
+.quote__line {
+  position: relative;
+  bottom: 10px;
+}
+
+@media screen and (min-width: 1024px) {
+  .quote {
+    font-size: 2rem;
+  }
+  .quote__author {
+    font-size: 2.4rem;
+  }
+  .quote__company {
+    font-size: 1.6rem;
+  }
+}
+
+/*GRIDS*/
+.grid {
+  display: grid;
+}
+@media screen and (min-width: 768px) {
+  .grid--1x2 {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 1fr 1fr; is the anther way to write*/
+  }
+}
+@media screen and (min-width: 1024px) {
+  .grid--1x3 {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* 1fr 1fr 1fr; is the anther way to write*/
+  }
+}
+
+/*TESTIMONIAL*/
+.testimonial {
+  padding: 3rem;
+}
+.testimonial__image {
+  position: relative;
+}
+.testimonial__image > img {
+  width: 100%; /*100% of the container makes the image responsive*/
+}
+.testimonial__image > .icon-container {
+  position: absolute;
+  top: 3rem;
+  right: -32px;
+}
+@media screen and (min-width: 768px) {
+  .testimonial .quote,
+  .testimonial.quote__author {
+    font-size: 2.4rem;
+  }
+  .testimonial .quote {
+    margin-left: 6rem;
+  }
+}
+
+/*CALL OUT*/
+.callout {
+  padding: 4rem;
+  border-radius: 5px;
+}
+
+.callout--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.callout__heading {
+  color: #fff;
+  margin-top: 0;
+  font-size: 3rem;
+}
+.callout .btn {
+  justify-self: center;
+  align-self: center;
+}
+.callout__content {
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .callout .grid--1x2 {
+    grid-template-columns: 1fr auto; /*auto helps to widen the second column to fit button*/
+  }
+  .callout__content {
+    text-align: left;
+  }
+  .callout .btn {
+    justify-self: start;
+    margin: 0 2rem;
+  }
+}
+
+/*COLLAPSIBLE*/
+.collapsible__header {
+  display: flex;
+  justify-content: space-between; /*space between push the content to the right edge of the */
+}
+
+.collapsible__heading {
+  margin-top: 0;
+  font-size: 3rem;
+}
+
+.collapsible__chevron {
+  transform: rotate(
+    -90deg
+  ); /*chevron is no more a drop down it is expanding to the right*/
+  transition: transform 0.5s; /*transition property animate it making the rotation slow/fast /*/
+}
+
+.collapsible__content {
+  /*display: none;  /*this none property cannot be animated so use max-height property */
+  max-height: 0; /*With height 0 we will have overflow so set overflow to hidden 
+    then go to collapsible--expanded .collapsible__content property and make max height to 100vh */
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.3s; /*to animate multiple properties use ALL property instead of max-height specifically*/
+}
+
+.collapsible--expanded .collapsible__chevron {
+  /*this is the way you can expand the cheron*/
+  transform: rotate(0);
+}
+
+.collapsible--expanded .collapsible__content {
+  /*it makes the content visible when expanded*/
+  max-height: 100vh; /*100% of the view  port height dont set just height property*/
+  opacity: 1;
+}
+
+/*BLOCKS*/
+
+.block {
+  --padding-vertical: 6rem; /*TRICK: THIS MAKES PADDING AVALABLE TO BLOCK AND ALAL ITS CHILDREN 
+    use it in the next line and for skew below*/
+  padding: Var(--padding-vertical) 2rem; /*6 for horizondal and 2 for vertical*/
+  /* border: 2px solid red; /* create first a border tempererly to see the container  and remove onece it is done*/
+}
+
+.block__header {
+  /*wrap the header and para inside a header and with name <header class="block__header"> 
+    and style it like this seperatly so that it affect only this header and para not the entire card*/
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.block__heading {
+  margin-top: 0;
+}
+
+.block--dark {
+  background: #000;
+  color: #7b858b;
+}
+
+.block--dark h1,      /*we can also just use .block__heading as class and add here in style sheet .block__heading and color*/
+  .block--dark h2,
+  .block--dark h3 {
+  /*in block dark element if we have block heading its color should be white*/
+  color: #fff;
+}
+.block--skewed-right {
+  padding-bottom: calc(var(--padding-vertical) + 4rem);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 90%);
+  /*each number represent X Y angle 0% 0%  topleft, top right,bottom right, bottom left*/
+}
+.block--skewed-left {
+  padding-bottom: calc(var(--padding-vertical) + 4rem);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 0% 100%);
+  /*each number represent X Y angle 0% 0%  topleft, top right,bottom right, bottom left*/
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto; /* 0px for vertical margin and auto makes the space to be distributed equaly as per the screen size*/
+}
+
+/*NAVIGATION BAR*/
+
+/*mobile version*/
+.nav {
+  background: #000;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /*with felx-wrap and width properties the list goes to teh second line for mobile*/
+  padding: 0 1rem; /*make the nav bar slim horizondally*/
+  align-items: center; /*bring toggle button to the center of the nav bar verticaly*/
+}
+
+.nav__list {
+  width: 100%;
+  margin: 0;
+}
+.nav__item {
+  border-bottom: 1px solid #222;
+  padding: 0.5rem 2rem;
+  /*color:#fff; /*if you apply color here it does not change because links has itsown color. 
+    So create a seperate style property targeting anger (a) tag. See below. >a is the direct child selector  */
+}
+.nav__item > a {
+  color: #d2d0db;
+  transition: color 0.3s;
+}
+
+.nav__item > a:hover {
+  /*when hover over the link it changes the color*/
+  color: #fff;
+}
+
+.nav__toggler {
+  opacity: 0.5; /* opacity helps to have slightly fade color */
+  transition: box-shadow 0.15s;
+  cursor: pointer; /*toggler clickable*/
+}
+.nav.collapsible--expanded .nav__toggler {
+  opacity: 1; /*color become brighter when we click on the toggler button*/
+  box-shadow: 0 0 0 3px #666; /* 0 0 h and veritcal offset,0 for making the blur and and shadow softer spread it 3px */
+  border-radius: 5px;
+}
+
+.nav__brand {
+  transform: translateY(
+    5px
+  ); /*it brings down the logo 3 px down to adjust the bottom gap*/
+}
+
+/*Desk Top Version*/
+@media screen and (min-width: 768px) {
+  .nav__toggler {
+    display: none; /*this hide the toggler when it is on the wider screens*/
+  }
+  .nav__list {
+    width: auto;
+    display: flex; /*this bring menu items in the first line horizondally*/
+    font-size: 1.6rem;
+    max-height: 100%; /*By setting the height nav menu will be always visible on a wide screen. 
+  If we font want just remove the height*/
+    opacity: 1;
+  }
+  .nav__item {
+    border: 0;
+  }
+}
+
+/*HERO/BANNER*/
+
+.hero__tagline {
+  font-size: 2rem;
+  color: #b9c3cf;
+  letter-spacing: 1px;
+  margin: 2rem 0 5rem;
+}
+.hero__image {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .hero {
+    padding-top: 0;
+  }
+  .hero__content {
+    text-align: left;
+    align-self: center; /*this align the text to the middle of the image verically*/
+  }
+}
+
+/*DOMAIN BLOCK*/
+/*Mobile Version*/
+.block-domain .input-group {
+  box-shadow: 0 0 30px 20px #e6ebee;
+  border: 0;
+  margin: 4rem auto;
+  max-width: 670px;
+}
+.block-domain__prices {
+  color: var(--color-headings);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(
+    2,
+    6rem
+  ); /*with column and rows we now designed a grid*/
+  font-size: 2rem;
+  font-weight: 600;
+  justify-items: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .block-domain__prices {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    /*auto-fit value is the trick no need to change anything in the future if we decide to remove a value from the grid
+       but along with auto fit we should use minmax value for this to work minmax(10rem, 1fr) */
+    /*divide the space into 6 fr and give each 1 fr */
+  }
+}
+
+/*PLAN BLOCK*/
+
+.block-plans .grid {
+  gap: 8rem 4rem; /*8rem for column gives horizondal gap between cards*/
+}
+.block-plan .card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/*FEATURS*/
+.feature {
+  gap: 4rem 2rem;
+  margin: 12rem;
+}
+.feature:first-of-type {
+  margin-top: 6rem;
+}
+.feature__heading {
+  margin: 1rem 0;
+}
+.feature__image {
+  width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .feature:nth-of-type(even) .feature__content {
+    /*changeing the content to second to first as the size of the screen changes*/
+    order: 2;
+  }
+}
+
+/*SHOWCASE BLOCK*/
+
+.block-showcase__image > img {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .block-showcase.grid {
+    grid-template-columns: 50% 50%;
+  }
+
+  .block-showcase__image {
+    justify-self: end;
+  }
+
+  .block-showcase__image > img {
+    width: auto;
+    max-width: 700px;
+  }
+}
+
+/*TESTIMONIAL BLOCK*/
+/*See the mark up and style sheeta bove for details*/
+
+/*FOOTER*/
+
+/*Mobile*/
+.footer {
+  background: #232323;
+}
+.footer a {
+  color: #777;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  /*this is how we create hover effect*/
+  color: #fff;
+}
+.footer__section {
+  padding: 2rem;
+  border-bottom: 1px solid #393939; /*it create a visible line in the bottom of each section as border*/
+}
+.footer__section.list {
+  margin: 0;
+}
+.footer__heading {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.footer__brand {
+  margin: 5rem;
+  text-align: center;
+}
+/*TODO: img{width:100;} set a general rule for all images width 100% to make them responsive */
+
+.footer__brand img {
+  width: 100%;
+  max-width: 230px;
+}
+.footer__copyright {
+  font-size: 2.1rem;
+  color: #fff;
+  opacity: 0.3;
+}
+
+/*Desktop version*/
+@media screen and (min-width: 768px) {
+  /* this query brings footer herding horizondal and menus right under each heading vertical on wider screens*/
+  .footer__sections {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(10rem, 1fr)
+    ); /*TRICK: auto-fit helps the grid to fit as many items as possible*/
+  }
+}
+.footer .collapsible__chevron {
+  /* This means in the footer section if we have a chevron, it should be hidden*/
+  display: none;
+}
+.footer.collapsible__content {
+  opacity: 1;
+  max-height: 100%;
+}
+
+.footer__brand {
+  order: -1; /*-1 moved the logo (brand ) to the left of the footer. by default 0 keeps it on the right side*/
+  margin-top: 1rem; /*moved logo to up*/
+}
+.footer__copyright {
+  font-size: 1.5rem;
+}
+.footer__section {
+  border: none;
+}
+.footer__heading {
+  font-size: 1.6rem;
+}
